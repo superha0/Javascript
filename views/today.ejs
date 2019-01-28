@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ko">
+<%- include('layout/head') %>
+<body>
+	<a href="#main" id="skipNavi">본문바로가기22</a>
+	<div id="page">
+    <%- include('layout/header') %>
+    <div id="main">
+        <section id="search">
+          <h1>쿠폰 검색</h1>
+          <form id="coupon_search" name="coupon_search" action="#" method="get">
+            <%- include('layout/search') %>
+            <input type="submit" value="검색">
+          </form>
+        </section>
+        <section id="coupon">
+          <h1 class="blind">쿠폰 리스트</h1>
+          <div id="time"><time datetime="2099-12-31">2099-12-31</time></div>
+          <div class="coupon_list">
+            <!-- 쿠폰 목록 출력 영역 -->
+            <% list.forEach(function(coupon,i){ %>
+            <article class="p<%=i%>" tabindex="0">
+              <h1><%=coupon.couponName%></h1>
+              <a href="/coupons/<%=coupon._id%>">
+                <img class="list_img" src="/image/coupon/<%= coupon.image.main.file %>" alt="<%=coupon.image.main.desc %>">
+              </a>
+              <section class="content">						
+                <ul class="coupon_info">									
+                  <li class="discount">할인가격 : <em><%=coupon.price%>원</em></li>
+                </ul>
+              </section>
+            </article>
+            <% }); %>
+            <% for(var i=list.length; i<5; i++) { %>
+            <article class="p<%=i%> no_content">
+              <h1>등록된 상품이 없습니다.</h1>
+            </article>
+            <% } %>
+          </div>
+        </section>
+        <div id="coupon_control">
+          <% if(list.page.pre){ %>
+            <a href="<%= list.page.pre %>"><button type="button" class="btn_pre">이전</button></a>
+          <% }else{ %>
+            <button type="button" class="btn_pre">이전</button>
+          <% } %>
+          <% if(list.page.next){ %>
+            <a href="<%= list.page.next %>"><button type="button" class="btn_next">다음</button></a>    
+          <% }else{ %>
+            <button type="button" class="btn_next">다음</button>
+          <% } %> 
+        </div>
+        
+        
+        
+    </div>
+    <%- include('layout/footer') %>
+	</div>
+</body>
+</html>
+

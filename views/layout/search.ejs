@@ -1,0 +1,19 @@
+<label for="search_date">기간</label>
+<select id="search_date" name="date">
+  <option value="buyable">구매가능</option>
+  <option value="all" <%if(query.date=='all'){%>selected<%}%>>전체</option>
+  <option value="past" <%if(query.date=='past'){%>selected<%}%>>지난쿠폰</option>
+</select>
+<label for="search_location">지역</label>
+<select id="search_location" name="location">
+  <option value="">전체</option>
+  <option <%if(query.location=='강남'){%>selected<%}%>>강남</option>
+  <option <%if(query.location=='압구정'){%>selected<%}%>>압구정</option>
+  <option <%if(query.location=='논현'){%>selected<%}%>>논현</option>
+  <option <%if(query.location=='홍대'){%>selected<%}%>>홍대</option>
+  <option <%if(query.location=='신촌'){%>selected<%}%>>신촌</option>
+  <option <%if(query.location=='기타'){%>selected<%}%>>기타</option>
+</select>
+<label for="search_keyword">키워드</label>
+<input type="text" id="search_keyword" name="keyword" value="<%=query.keyword%>"> 
+<!--검색한 조건이 그대로 유지된다.-->

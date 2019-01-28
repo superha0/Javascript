@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <title>쿠폰 : 멀팡</title>
+  <meta name="description" content="멀티 캠퍼스 HTML5 강의용 데모 사이트">
+  <meta name="keywords" content="html5,css3,svg">
+  <link rel="shortcut icon" href="/image/favicon.ico">
+	<link rel="stylesheet" media="all" type="text/css" href="/css/layout.css">
+	<link rel="stylesheet" type="text/css" media="screen" href="js/lib/jquery-ui-1.12.1/jquery-ui.css" />
+	<link rel="stylesheet" type="text/css" media="screen" href="js/lib/Guriddo_jqGrid_JS_5.3.2/css/ui.jqgrid.css" />
+	<script src="js/lib/jquery-1.12.4.min.js"></script>
+	<script src="js/lib/Guriddo_jqGrid_JS_5.3.2/js/i18n/grid.locale-en.js"></script>
+	<script src="js/lib/Guriddo_jqGrid_JS_5.3.2/js/jquery.jqGrid.min.js"></script>
+	<script>
+		$(function(){
+			$('#jqGrid').jqGrid({
+				url: 'http://localhost/couponList',
+				mtype: 'GET',
+				datatype: 'json',
+				caption: '쿠폰 목록',
+				colModel: [
+					{ label: 'ID', name: '_id', key: true, width: 160, hidden: true },
+					{ label: '쿠폰명', name: 'couponName', width: 100, sortable: false, editable: true },
+					{ label: '원가', name: 'primeCost', width: 50, align: 'right', sortable: false, editable: true},
+					{ label: '판매가', name: 'price', width: 50, align: 'right', editable: true},
+					{ label: '판매수량', name: 'quantity', width: 70, align: 'right', sortable: false},
+					{ label: '판매된수량', name: 'buyQuantity', width: 70, align: 'right'},
+					{ label: '판매시작일', name: 'saleDate.start', width: 70, align: 'center'},
+					{ label: '판매종료일', name: 'saleDate.finish', width: 70, align: 'center', sortable: false},
+					{ label: '설명', name: 'desc', width: 300, sortable: false},
+				],
+				width: 960,
+				height: 100,
+				// height: 566,
+				rowNum: 5,
+				pager: '#jqGridPager',
+				editurl: 'http://localhost/couponEdit'
+			});
+
+			$('#jqGrid').navGrid("#jqGridPager", {
+				view: true,
+				// add: false, 
+				// edit: false, 				
+				// del: false, 
+				// search: false
+				// refresh: false				
+			});
+		});
+	</script>
+</head>
+<body>
+	<a href="#main" id="skipNavi">본문바로가기</a>
+	<div id="page">
+		<%- include('layout/header') %>
+    <div id="main">			
+			<table id="jqGrid"></table>
+			<div id="jqGridPager"></div>
+		</div>
+		<%- include('layout/footer') %>	
+	</div>
+</body>
+</html>

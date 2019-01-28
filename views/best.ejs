@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ko">
+<%- include('layout/head') %>
+<body>
+	<a href="#main" id="skipNavi">본문바로가기22</a>
+	<div id="page">
+    <%- include('layout/header') %>
+
+    <div id="main">
+      <section id="best_section">
+        <article id="graph_by_sale_article">
+          <h1>mulpang Best!</h1>
+          <div id="graph_by_sale_div">
+            <h2>판매순 그래프</h2>
+            <canvas id = "graph_by_sale" width="472" height="250"></canvas>
+          </div>
+          <div id="graph_by_point_div">
+            <h2>평가순 그래프</h2>
+            <canvas id="graph_by_point" width="472" height="250">
+              <p>canvas가 지원되지 않는 브라우저 입니다.</p>
+            </canvas>
+          </div>
+          <div id="graph_by_view_div">
+            <h2>조회순 그래프</h2>
+            <canvas id="graph_by_view" width="472" height="250">
+              <p>canvas가 지원되지 않는 브라우저 입니다.</p>
+            </canvas>
+          </div>
+          <div id="graph_by_reply_div">
+            <h2>댓글순 그래프</h2>
+            <div id="graph_by_reply"></div>
+          </div>
+        </article>
+      </section>  
+		</div>
+    <%- include('layout/footer') %>
+	</div>
+</body>
+</html>
+
+
+
+
+

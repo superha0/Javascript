@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ko">
+<%- include('layout/head') %>
+<body>
+	<a href="#main" id="skipNavi">본문바로가기22</a>
+	<div id="page">
+    <%- include('layout/header') %>
+    <div id="main">			
+			<section id="coupon">
+				<h1 class="blind">쿠폰 상세 정보</h1>
+				<div class="coupon_list">
+          <!-- 쿠폰 상세정보 출력 영역 -->		
+          <article class="detail">
+            <h1><%=coupon.couponName%></h1>
+            <img class="detail_img" 
+                  src="/image/coupon/<%=coupon.image.detail.file%>" 
+                  alt="<%=coupon.image.detail.desc%>">
+
+            <!-- 구매하기 -->
+            <section class="form_section">
+              <h1>구매하기</h1>
+              <form>
+
+                <input type="hidden" name="couponId" value="<%=coupon._id%>">
+                <input type="hidden" name="unitPrice" value="<%=coupon.price%>">
+
+                <img src="/css/svg/cart_form.svg">
+                <table>
+                  <tbody>
+                    <tr>
+                      <th><label for="buyQuantity">구매수량</label></th>
+                      <td class="number_td">
+                        <input type="number" name="quantity" min="1" max="<%=coupon.quantity-coupon.buyQuantity%>" required>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th>결제가격</th>
+                      <td class="number_td"><output><%=coupon.price%></output>원</td>
+                    </tr>
+                    <tr>
+                      <th><label for="cardtype">카드종류</label></th>
+                      <td>
+                        <select name="cardType">
+                          <option value="KB">국민카드</option>
+                          <option value="HN">하나카드</option>
+                          <option value="BC">BC카드</option>
+                          <option value="SS">삼성카드</option>
+                          <option value="SH">신한카드</option>
+                        </select>
+                      </td>
+                    </tr>
+                    <tr>
+                      <th><label for="cardNumber">카드번호</label></th>
+                      <td><input type="text" name="cardNumber" 
+                        pattern="^\d{16}$" maxlength="16" required value="1234567890123456"></td>
+                    </tr>
+                    <tr>
+                      <th><label>카드 유효 기간</label></th>
+                      <td>
+                        <input type="number" name="cardExpireMonth" title="유효기간 월" 
+                        min="1" max="12" required placeholder="MM" value="12"> 
+                        / <input type="number" name="cardExpireYear" title="유효기간 년"
+                         min="2019" max="2029" required placeholder="YYYY" value="2021">
+                      </td>
+                    </tr>
+                    <tr>
+                      <th><label for="csv">CSV코드</label></th>
+                      <td><input type="text" value="123" name="csv" maxlength="3" pattern="^\d{3}$" required placeholder="카드 뒷면 숫자 3자리"></td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="btn_div">
+                  <button type="submit" class="btn_buy">구매</button>
+                  <button type="reset" class="btn_cancel">취소</button>
+                </div>
+              </form>
+            </section>
+
+          </article>
+				</div>
+			</section>
+		</div>
+    <%- include('layout/footer') %>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+

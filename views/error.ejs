@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ko">
+<%- include('layout/head') %>
+<body>
+	<a href="#main" id="skipNavi">본문바로가기22</a>
+	<div id="page">
+    <%- include('layout/header') %>
+    <div id="main">			
+      <h1><%= message %></h1>
+      <h2><%= error.status %></h2>
+      <pre><%= error.stack %></pre>
+		</div>
+    <%- include('layout/footer') %>
+	</div>
+</body>
+</html>
+
+
+

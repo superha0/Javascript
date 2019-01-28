@@ -1,0 +1,17 @@
+  <head>
+    <meta charset="utf-8">
+    <title><% if(typeof title != 'undefined'){ %><%= title %><% } %> : 멀팡</title>
+    <meta name="description" content="멀티 캠퍼스 HTML5 강의용 데모 사이트">
+    <meta name="keywords" content="html5,css3,svg">
+    <link rel="shortcut icon" href="/image/favicon.ico">
+    <link rel="stylesheet" media="all" type="text/css" href="/css/layout.css">
+    <% if(typeof css != 'undefined'){ %>
+    <link rel="stylesheet" media="all" type="text/css" href="/css/<%=css%>">
+    <% } %>  
+    <script src="/js/lib/jquery-1.12.4.min.js"></script>
+    <script src="/js/util.js"></script>
+    <script src="/js/common.js"></script>
+    <% if(typeof js != 'undefined'){ %>
+    <script src="/js/<%=js%>"></script>
+    <% } %>  
+  </head>

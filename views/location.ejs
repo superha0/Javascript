@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ko">
+<%- include('layout/head') %>
+<body>
+	<a href="#main" id="skipNavi">본문바로가기22</a>
+	<div id="page">
+    <%- include('layout/header') %>
+    <div id="main">			
+      <section id="location_map" title="지도 표시 영역"> .....loading..... </section>
+			<section id="coupon">
+				<h1 class="blind">쿠폰 상세 정보</h1>
+				<div class="coupon_list">
+          <!--  쿠폰 목록 출력 영역 -->
+          <% list.forEach(function(coupon,i){ %>
+            <article tabindex="0" data-lat="<%=coupon.position.lat%>", data-lng="<%=coupon.position.lng%>">
+              <h1><%=coupon.couponName%></h1>
+              <a href="/coupons/<%=coupon._id%>">
+                <img class="detail_img" 
+                src="/image/coupon/<%=coupon.image.detail.file%>" 
+                alt="<%=coupon.image.detail.desc%>">
+              </a>
+              <section class="content">
+                  <p class="note">
+                      <%=coupon.desc%>
+                    </p>
+                    <ul class="coupon_info">
+                      <li class="cost">정상가격 : <del><%=coupon.primeCost%>원</del></li>
+                      <li class="discount">할인가격 : <em><%=coupon.price%>원</em></li>
+                      <li class="expire">유효기간 : 
+                        <time datetime="<%=coupon.useDate.start%>">
+                          <%=coupon.useDate.start%>
+                        </time> 부터 
+                        <time datetime="<%=coupon.useDate.finish%>">
+                          <%=coupon.useDate.finish%>
+                        </time> 까지
+                      </li>
+                      <li class="remain">잔여수량 : 
+                        <span><%=coupon.quantity-coupon.buyQuantity%>개</span>
+                      </li>
+                      <li class="term">판매기간 : 
+                        <span><%=coupon.saleDate.finish%></span>
+                      </li>
+                    </ul>
+              </section>
+            </article>		
+          <% }); %>
+        </div>
+      </section>
+      <div id="location_coupon_control">
+        <div id="location_coupon_counter">
+          <span id="counter_now">6</span> / <span id="counter_all">12</span>
+        </div>
+        <button type="button" id="btn_pre_location_coupon">이전</button>
+        <input type="range" min="0" max="11" value="5">
+        <button type="button" id="btn_next_location_coupon">다음</button>
+      </div>
+		</div>
+    <%- include('layout/footer') %>
+	</div>
+</body>
+</html>
+
+
+

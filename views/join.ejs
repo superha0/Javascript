@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko">
+<%- include('layout/head') %>
+<body>
+	<a href="#main" id="skipNavi">본문바로가기22</a>
+	<div id="page">
+    <%- include('layout/header') %>
+    <div id="main">			
+      <section class="form_section">
+        <h1>회원 가입</h1>
+        <form>
+          <input type="hidden" name="tmpFileName">
+          <img src="/image/no_profile.png" alt="프로필 샘플 이미지">
+          <table>
+            <tr>
+              <th><label for="profile">프로필 이미지</label></th>
+              <td>
+                <input type="file" accept="image/*" id="profile" required>
+                <progress>0%</progress>
+              </td>
+            </tr>
+            <tr>
+              <th><label for="email">이메일</label></th>
+              <td><input type="email" id="email" name="_id" required></td>
+            </tr>
+            <tr>
+              <th><label for="password">비밀번호</label></th>
+              <td><input type="password" id="password" name="password" required></td>
+            </tr>
+            <tr>
+              <th><label for="password2">비밀번호확인</label></th>
+              <td><input type="password" id="password2" required></td>
+            </tr>			
+          </table>
+          <div class="btn_div"><button type="submit">회원 가입</button></div>
+        </form>
+      </section>
+		</div>
+
+    <%- include('layout/footer') %>
+	</div>
+</body>
+</html>
+
+

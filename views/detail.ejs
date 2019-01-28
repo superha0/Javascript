@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<%- include('layout/head') %>
+<body>
+	<a href="#main" id="skipNavi">본문바로가기22</a>
+	<div id="page">
+    <%- include('layout/header') %>
+    
+
+    <div id="main">			
+			<section id="coupon">
+				<h1 class="blind">쿠폰 상세 정보</h1>
+				<div class="coupon_list">
+          <!-- 쿠폰 상세정보 출력 영역 -->		
+          <article class="detail" data-couponid="<%=coupon._id%>">
+            <h1><%=coupon.couponName%></h1>
+            <img class="list_img" src="/image/coupon/<%= coupon.image.main.file %>" alt="<%=coupon.image.main.desc %>">
+
+            <img class="detail_img" 
+              src="/image/coupon/<%=coupon.image.detail.file%>" 
+              alt="<%=coupon.image.detail.desc%>">
+            <section class="content">
+              <p class="note">
+                <%=coupon.desc%>
+              </p>
+              <ul class="coupon_info">
+                <li class="cost">정상가격 : <del><%=coupon.primeCost%>원</del></li>
+                <li class="discount">할인가격 : <em><%=coupon.price%>원</em></li>
+                <li class="expire">유효기간 : 
+                  <time datetime="<%=coupon.useDate.start%>">
+                    <%=coupon.useDate.start%>
+                  </time> 부터 
+                  <time datetime="<%=coupon.useDate.finish%>">
+                    <%=coupon.useDate.finish%>
+                  </time> 까지
+                </li>
+              </ul>
+              <ul class="coupon_current">
+                <li class="remain">잔여수량 : 
+                  <span><%=coupon.quantity-coupon.buyQuantity%>개</span>
+                </li>
+                <li class="term">판매기간 : 
+                  <span><%=coupon.saleDate.finish%></span>
+                </li>
+              </ul>
+              <% if(coupon.quantity > coupon.buyQuantity){ %>
+                <a href="/purchase/<%=coupon._id%>" class="buy">구매하기</a>
+              <% }else{ %>
+                <span class="soldout">매진</span>
+              <% } %>
+            </section>
+            <div class="coupon_tab">
+							<section class="gallery">
+								<h1 tabindex="0">갤러리</h1>
+								<div class="gallery_viewport">
+                  <h1>동영상</h1>
+                  <% if(coupon.video){ %>
+                    <video src="/video/<%=coupon.video.src%>"
+                      poster="/video/<%=coupon.video.poster%>"
+                      alt="<%=coupon.video.desc%>" controls
+                      preload="none" controls></video>
+                  <% }else{ %>
+                    <img src="/image/no_video.jpg" alt="동영상 등록 안됨">
+                  <% } %>
+								</div>
+
+                <article>
+                  <h1>포토 리스트</h1>
+                  <ul class="photo_list">
+                    <!-- 포토 리스트 출력 영역 -->                    
+                    <% coupon.image.etc.forEach(function(etc){ %>
+                    <li>
+                      <a href="/image/coupon/<%=etc.file%>" 
+                          title="<%=etc.desc%>">
+                        <img src="/image/coupon/<%=etc.file%>" 
+                            alt="<%=etc.desc%>">
+                      </a>
+                    </li>
+                    <% }); %>       
+                  </ul>
+                
+                  <% if(coupon.image.etc.length > 0){ %>
+                  <div class="big_photo">
+                    <img width="300" height="250" 
+                      src="/image/coupon/<%=coupon.image.etc[0].file%>" 
+                      alt="<%=coupon.image.etc[0].desc%>">
+                  </div>
+                  <% } %>                  
+                </article>
+							</section>
+              <section class="reply tab_off">
+                <h1 tabindex="0">쿠폰 후기 및 평점</h1>
+                <ul class="reply_list">
+                  <% coupon.epilogueList.forEach(function(epilogue, i){ %>                    
+                    <li>
+                      <article>
+                        <span><%=toStar(epilogue.satisfaction)%></span>
+                        <p><%=epilogue.content%></p>
+                        <footer>
+                          <img src="/image/member/<%=epilogue.writer%>" alt="<%=epilogue.writer%> 회원 프로필 사진"> <span><%=epilogue.writer%></span>
+                          <time datetime="<%=epilogue.regDate%>"><%=epilogue.regDate%></time>
+                        </footer>
+                      </article>
+                    </li>
+                    <% }); %>
+                </ul>
+              </section>
+              <section class="map tab_off">
+                <h1 tabindex="0">찾아오시는 길</h1>
+                <div class="map_div"><img src="https://openapi.naver.com/v1/map/staticmap.bin?clientId=nurYihykXbeXcAVh1eYD&url=http://localhost&level=10&w=552&h=282&baselayer=default&center=<%=coupon.shop.position.lng%>,<%=coupon.shop.position.lat%>&markers=<%=coupon.shop.position.lng%>,<%=coupon.shop.position.lat%>"></div>
+                <article class="shop">
+                  <h1>
+                    <span class="company_name"><%=coupon.shop.shopName%></span>
+                  </h1>
+                  <div>
+                    <dl>
+                      <dt>영업점 소개</dt>
+                      <dd>
+                        <img src="/image/shop/<%=coupon.shop.picture.file%>" alt="<%=coupon.shop.picture.desc%>">
+                        <p class="company_desc"><%=coupon.shop.shopDesc%></p>
+                      </dd>
+                      <dt>찾아 오시는길</dt>
+                      <dd>
+                        <%=coupon.shop.directions%>
+                      </dd>
+                      <dt>영업시간</dt>
+                      <dd><%=coupon.shop.officeHours.open%> ~ <%=coupon.shop.officeHours.close%></dd>
+                      <dt>문의전화 / e-mail</dt>
+                      <dd>
+                        전화 : <a href="tel:<%=coupon.shop.tel%>"><%=coupon.shop.tel%></a>
+                      / e-mail : <a href="mailto:<%=coupon.shop.email%>"><%=coupon.shop.email%></a>
+                      </dd>
+                    </dl>
+                  </div>
+                </article>
+              </section>
+            </div>	
+            <button type="button" class="btn_add_cart">관심쿠폰등록</button>
+            <button type="button" class="btn_close_coupon_detail">쿠폰 상세 보기 닫기</button>
+          </article>
+				</div>
+			</section>
+		</div>
+    <%- include('layout/footer') %>
+	</div>
+</body>
+</html>
+
+
+

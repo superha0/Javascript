@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ko">
+<%- include('layout/head') %>
+<body>
+	<a href="#main" id="skipNavi">본문바로가기22</a>
+	<div id="page">
+    <%- include('layout/header') %>
+    <link rel="stylesheet" media="all" type="text/css" href="/css/all.css">
+    <div id="main">
+			<section id="search">
+				<h1>쿠폰 검색</h1>
+				<form id="coupon_search" name="coupon_search" action="#" method="get">
+					<%- include('layout/search') %>
+          
+          <label for="list_order">정렬</label>
+          <select id="list_order" name="order">
+            <option value="saleDate.start">최근순</option>
+            <option value="satisfactionAvg" <%if(query.order=='satisfactionAvg'){%>selected<%}%>>평가순</option>
+            <option value="buyQuantity" <%if(query.order=='buyQuantity'){%>selected<%}%>>판매순</option>
+          </select>
+          
+          
+          
+					<input type="submit" value="검색">
+				</form>
+			</section>
+			<section id="coupon">
+				<h1 class="blind">쿠폰 리스트</h1>
+				<div class="coupon_list">				
+          <!-- 쿠폰 목록 출력 영역 -->     
+          
+          <% list.forEach(function(coupon,i){ %>
+            <article tabindex="0">
+              <h1><%=coupon.couponName%></h1>
+              <a href="/coupons/<%=coupon._id%>">
+                <img class="detail_img" 
+                src="/image/coupon/<%=coupon.image.detail.file%>" 
+                alt="<%=coupon.image.detail.desc%>">
+              </a>
+              <section class="content">
+                    <ul class="coupon_info">
+                      <li class="cost">정상가격 : <del><%=coupon.primeCost%>원</del></li>
+                      <li class="discount">할인가격 : <em><%=coupon.price%>원</em></li>
+                      <li class="expire">유효기간 : 
+                        <time datetime="<%=coupon.useDate.start%>">
+                          <%=coupon.useDate.start%>
+                        </time> 부터 
+                        <time datetime="<%=coupon.useDate.finish%>">
+                          <%=coupon.useDate.finish%>
+                        </time> 까지
+                      </li>
+                      <li class="remain">잔여수량 : 
+                        <span><%=coupon.quantity-coupon.buyQuantity%>개</span>
+                      </li>
+                      <li class="term">판매기간 : 
+                        <span><%=coupon.saleDate.finish%></span>
+                      </li>
+                    </ul>
+              </section>
+            </article>		
+          <% }); %>
+          
+				</div>
+			</section>
+		</div>
+    <%- include('layout/footer') %>
+	</div>
+</body>
+</html>
+
+
+
+
+
+
+
+

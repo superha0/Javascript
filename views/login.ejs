@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ko">
+<%- include('layout/head') %>
+<body>
+	<a href="#main" id="skipNavi">본문바로가기22</a>
+	<div id="page">
+    <%- include('layout/header') %>
+    <div id="main">
+			<section class="form_section">
+				<h1>로그인</h1>
+        <form method="post" action="/users/login">
+          <% if(typeof errors == 'undefined'){ %> 
+            <h2>로그인이 필요합니다.</h2>
+          <% }else{ %>
+            <h2><%= errors.message %></h2>
+          <% } %>
+          
+          
+          <br>
+					<img src="/image/svg/login.svg">
+					<table>
+						<tr>
+							<th><label for="email">이메일</label></th>
+							<td><input type="email" id="email" name="_id" required autofocus></td>
+						</tr>
+						<tr>
+							<th><label for="password">비밀번호</label></th>
+							<td><input type="password" id="password" name="password" required></td>
+						</tr>
+					</table>
+					<div class="btn_div">
+						<button type="submit">로그인</button>
+					</div>
+				</form>
+			</section>
+		</div>
+    <%- include('layout/footer') %>
+	</div>
+</body>
+</html>
+
+
+
